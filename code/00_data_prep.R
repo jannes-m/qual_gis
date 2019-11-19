@@ -148,31 +148,27 @@ dim(abs_df)  # 380
 dir_data = "data/gis_total"
 files = grep("savedrecs", dir(dir_data), value = TRUE)
 # read the first file
-d = data.table::fread(file.path(dir_data, files[1]))
+d = data.table::fread(file.path(dir_data, files[1]), quote = "")
 # unfortunately, end of lines end with \t\t, which indicates a second column for
 # which there is no column name
 # get column names
-tmp = names(warnings()[1])
-cn = gsub(".*data: ", "", tmp) %>%
-  strsplit(split = "\t") %>%
-  unlist
 files = files[-1]
 # load all other files and rbind them
 for (i in files) {
-  tmp = data.table::fread(file.path(dir_data, i))
+  tmp = data.table::fread(file.path(dir_data, i), quote = "")
   d = rbind(d, tmp)
 }
+nms = names(d)
+data.table::setnames(d, old = names(d), new =  c(nms[-1], nms[1]))
 # delete last column
 d = as.data.frame(d)
 d = d[, -ncol(d)]
-# add column names
-names(d) = cn
 # just keep year and times cited
 d = select(d, PY, TC)
 d = mutate(d, n = 1)
 # aggregate
 d = group_by(d, PY) %>%
-  summarize_all(funs(sum)) %>%
+  summarize_all(list(sum)) %>%
   arrange(PY)
 # remove records from the year 2017
 gis_all = filter(d, PY != 2017)
