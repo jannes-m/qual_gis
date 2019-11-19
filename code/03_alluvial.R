@@ -21,7 +21,12 @@
 #**********************************************************
 
 # attach packages
-pacman::p_load(ggthemes, tidyverse, plotly, ggraph, igraph, magrittr)
+library("ggthemes")
+library("tidyverse")
+library("plotly")
+library("ggraph")
+library("igraph")
+library("magrittr")
 # attach data
 abs_df = readRDS("images/00_abs_df.rds")
 qual = readRDS("images/00_qual.rds")
@@ -157,7 +162,7 @@ caq = select(relevant, fidCAQDAS) %>%
   mutate(per = n / sum(n) * 100) %>%
   arrange(desc(per))
 filter(caq, CAQDAS_Typ != "NA") %>%
-  summarise_at(list(~sum), .vars = c("n", "per"))
+  summarise_at(list(sum), .vars = c("n", "per"))
 
 # reported database usage
 setdiff(relevant$fidGeodatabase, gdb_key$idGeodatabase)
@@ -184,7 +189,7 @@ gdb = group_by(gdb, Geodatabase) %>%
   arrange(desc(per))
 
 filter(gdb, Geodatabase != "NA") %>%
-  summarize_at(list(~sum), .vars = c("n", "per"))
+  summarize_at(list(sum), .vars = c("n", "per"))
 # however, this also includes a category named "no Database"...
 
 #**********************************************************
