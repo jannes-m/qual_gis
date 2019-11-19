@@ -59,7 +59,7 @@ summarize_at(pub_cits, c("pubs", "tc"), sum)
 pub_cits = mutate(pub_cits,
                   pubs = pubs / sum(pubs) * 100,
                   tc = tc / sum(tc) * 100)
-pub_cits = melt(pub_cits, id.var = "year")
+pub_cits = reshape2::melt(pub_cits, id.var = "year")
 names(pub_cits) = c("year", "class", "qual_gis")
 levels(pub_cits$class) = c("Publications", "Citations")
 
@@ -71,7 +71,7 @@ summarize_at(gis_all, c("TC", "n"), sum)
 gis_all = mutate(gis_all,
                  TC = TC / sum(TC) * 100,
                  n = n / sum(n) * 100)
-gis_all = melt(gis_all, id.var = "PY")
+gis_all = reshape2::melt(gis_all, id.var = "PY")
 names(gis_all) = c("year", "class", "gis_all")
 levels(gis_all$class) = c("Citations", "Publications")
 # reverse level order
