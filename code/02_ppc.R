@@ -23,6 +23,7 @@ library("stringr")
 library("forcats")
 library("magrittr")
 library("R2wd")
+library("wpp2015")
 
 # attach data
 wos = readRDS("images/00_wos.rds")
@@ -147,8 +148,8 @@ cap = paste(": Number of all qualitative GIS studies per country (Total),",
             "and per one million inhabitants (per capita).",
             "Only countries with >3 publications were considered.")
 # upload the table to the Word document
-wdGet()
-wdTable(out,
-        caption = cap, pointsize = 10, align = "l", row.names = FALSE,# attach population data
-
-        caption.pos = "above")
+# wdGet()
+# wdTable(out,
+#         caption = cap, pointsize = 10, align = "l", row.names = FALSE,# attach population data
+# 
+#         caption.pos = "above")
