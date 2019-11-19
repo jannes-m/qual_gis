@@ -131,9 +131,10 @@ dev.off()
 #**********************************************************
 
 # reproject again
+proj = "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
 clus =
   # first transfrom since gdal of sf doesn't like "+proj=wintri"
-  spTransform(clus, CRSobj = "+init=epsg:4326") %>%
+  spTransform(clus, CRSobj = proj) %>%
   st_as_sf %>%
   left_join(., wos, by = "id_citavi")
 # rename levels properly
