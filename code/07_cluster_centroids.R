@@ -233,7 +233,7 @@ ft = align(ft, align = "center", part = "header")
 ft = align(ft, align= "left", part = "header", j = c("gis", "geopro", "dc"))
 ft = align(ft, align = "center")
 # make sure that only one digit is shown in the case of numeric columns
-ft = colformat_num(ft, digits = 1, col_keys = c("mean_author", "mean_tc"))
+ft = colformat_num(ft, digits = 1, j = c("mean_author", "mean_tc"))
 # add barplots to the flextable
 gis_src = paste0("figures/bars/bar_gis_core_", levels(clus$cluster), ".png")
 ft = display(ft,
@@ -265,9 +265,10 @@ ft = display(ft,
                                    height = 0.9)))
 # have a look at the output
 ft
+
 # create a docx file using Word (landscape mode)
-doc = read_docx(path = "~/Desktop/table_out.docx")
-doc = body_add_flextable(doc, value = ft)
-print(doc, target = "~/Desktop/table_out.docx")
+# doc = read_docx(path = "~/Desktop/table_out.docx")
+# doc = body_add_flextable(doc, value = ft)
+# print(doc, target = "~/Desktop/table_out.docx")
 # caption
 # Summarizing the 20 papers that are closest to the cluster center by cluster group.
