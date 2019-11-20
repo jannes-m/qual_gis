@@ -22,7 +22,7 @@ library("dplyr")
 library("stringr")
 library("forcats")
 library("magrittr")
-library("R2wd")
+# library("R2wd")  # only available under Windows, and not really necessary
 library("wpp2015")
 
 # attach data
